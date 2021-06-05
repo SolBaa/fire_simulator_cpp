@@ -9,6 +9,6 @@
 
 2) Run the project
 
-` g++ main.cpp -o main -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf && ./main`
+`g++ *.cpp -o main -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf && ./main`
 
 3) Enjoy!!
