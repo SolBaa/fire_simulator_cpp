@@ -20,7 +20,7 @@ namespace scr
         }
         // Initialize Windows
         m_window = SDL_CreateWindow("Particle Fire Explosion",
-                                    SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+        SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
         if (m_window == NULL)
         {
@@ -51,7 +51,7 @@ namespace scr
         }
 
         m_buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
-        memset(m_buffer, 255, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+        memset(m_buffer, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
 
     
 
@@ -71,7 +71,7 @@ namespace scr
         return true;
     }
     void Screen::update(){
-                SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH * sizeof(Uint32));
+        SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH * sizeof(Uint32));
         SDL_RenderClear(m_renderer);
         SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
         SDL_RenderPresent(m_renderer);
@@ -79,6 +79,10 @@ namespace scr
 
     }
     void Screen::setPixel(int x , int y, Uint8 red, Uint8 green, Uint8 blue){
+
+        if( x<0 || x>= SCREEN_WIDTH || y<0 || y>= SCREEN_HEIGHT){
+            return;
+        }
         Uint32 color = 0;
         color += red;
         color<<=8;
@@ -91,6 +95,7 @@ namespace scr
         m_buffer[(y *SCREEN_WIDTH) + x] = color;
 
     }
+
     void Screen::close()
     {
         //After the program finished we need to destroy the window

@@ -1,7 +1,12 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+#include "Swarm.h"
 #include "Screen.h"
+#include "Particle.h"
 
 using namespace std;
 using namespace scr;
@@ -9,6 +14,7 @@ using namespace scr;
 int main()
 {
 
+	srand(time(NULL));
 	Screen screen;
 
 	if (screen.init() == false)
@@ -16,21 +22,43 @@ int main()
 		cout << "Error: Screen initialization" << endl;
 	}
 
+	Swarm swarm;
+
+
 	while (true)
 	{
 		// Update Particles
 		//Draw Particles.
 
-		// Draw Particles.
-		for (int y = 0; y < Screen::SCREEN_HEIGHT; y++)
-		{
-			for (int x = 0; x < Screen::SCREEN_WIDTH; x++)
-			{
-				screen.setPixel(x, y, 128, 0, 255);
-			}
+
+		int elapsed = SDL_GetTicks();
+		unsigned char green =(1 + sin(elapsed * 0.0002)) * 128;
+		unsigned char red = (1 + sin(elapsed * 0.0001)) * 128;
+		unsigned char blue = (1 + sin(elapsed * 0.0003)) * 128;
+
+
+		const Particle * const Particles = swarm.getParticles();
+		for (int i = 0; i <Swarm::NPARTICLES; i++) {
+			Particle particle = Particles[i];
+
+			int x = (particle.m_x +1) * Screen::SCREEN_WIDTH/2;
+			int y = (particle.m_y +1) * Screen::SCREEN_HEIGHT/2;
+
+			screen.setPixel(x,y,red,green,blue );
+
+
 		}
 
-		screen.setPixel(400, 300, 255, 255, 255);
+
+
+		// for (int y = 0; y < Screen::SCREEN_HEIGHT; y++)
+		// {
+		// 	for (int x = 0; x < Screen::SCREEN_WIDTH; x++)
+		// 	{
+		// 		screen.setPixel(x, y, red, green, blue);
+		// 	}
+		// }
+
 		// Draw the screen.
 		screen.update();
 
@@ -39,10 +67,6 @@ int main()
 		{
 			break;
 		}
-		// for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++)
-		//     {
-		//         m_buffer[i] = 0x00FFFFFF;
-		//     }
 	}
 
 	screen.close();

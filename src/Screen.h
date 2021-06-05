@@ -1,4 +1,3 @@
-
 #ifndef SCREEN_H
 #define SCREEN_H
 #include <SDL2/SDL.h>
@@ -11,6 +10,7 @@ namespace scr
     public:
         const static int SCREEN_WIDTH = 1000;
         const static int SCREEN_HEIGHT = 800;
+        ~Screen() {};
 
     private:
         SDL_Window *m_window;
