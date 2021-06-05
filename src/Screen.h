@@ -24,6 +24,7 @@ namespace scr
         bool proccesEvents();
         void update();
         void setPixel(int x , int y, Uint8 red, Uint8 green, Uint8 blue);
+        void clear();
         void close();
     };
 } //End of namespace
