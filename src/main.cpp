@@ -24,33 +24,30 @@ int main()
 
 	Swarm swarm;
 
-
 	while (true)
 	{
 		// Update Particles
-		
-		
+
 		//Draw Particles.
 		int elapsed = SDL_GetTicks();
-	
-		swarm.update(elapsed); 
 
-		unsigned char green =(1 + sin(elapsed * 0.0002)) * 128;
+		swarm.update(elapsed);
+
+		unsigned char green = (1 + sin(elapsed * 0.0002)) * 128;
 		unsigned char red = (1 + sin(elapsed * 0.0001)) * 128;
 		unsigned char blue = (1 + sin(elapsed * 0.0003)) * 128;
 
-
-		const Particle * const Particles = swarm.getParticles();
-		for (int i = 0; i <Swarm::NPARTICLES; i++) {
+		const Particle *const Particles = swarm.getParticles();
+		for (int i = 0; i < Swarm::NPARTICLES; i++)
+		{
 			Particle particle = Particles[i];
 
-			int x = (particle.m_x +1) * Screen::SCREEN_WIDTH/2;
-			int y = particle.m_y * Screen::SCREEN_WIDTH/2 +  Screen::SCREEN_HEIGHT/2;
+			int x = (particle.m_x + 1) * Screen::SCREEN_WIDTH / 2;
+			int y = particle.m_y * Screen::SCREEN_WIDTH / 2 + Screen::SCREEN_HEIGHT / 2;
 
-			screen.setPixel(x,y,red,green,blue );
-
+			screen.setPixel(x, y, red, green, blue);
 		}
-	screen.boxBlur();
+		screen.boxBlur();
 		// Draw the screen.
 		screen.update();
 

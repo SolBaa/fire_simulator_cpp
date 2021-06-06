@@ -72,6 +72,7 @@ namespace scr
         }
         return true;
     }
+
     void Screen::update()
     {
         SDL_UpdateTexture(m_texture, NULL, m_buffer1, SCREEN_WIDTH * sizeof(Uint32));
@@ -79,6 +80,7 @@ namespace scr
         SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
         SDL_RenderPresent(m_renderer);
     }
+
     void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
     {
 
@@ -145,6 +147,7 @@ namespace scr
             }
         }
     }
+    
     void Screen::close()
     {
         //After the program finished we need to destroy the window
