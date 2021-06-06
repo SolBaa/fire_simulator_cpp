@@ -14,7 +14,9 @@ namespace scr
         {
             m_particles[i].update(interval);
         }
-        lastTime = elapsed;
+        lastTime = elapsed; 
+
+        
     }
 
     Swarm::~Swarm()
