@@ -21,7 +21,7 @@ namespace scr
         }
         // Initialize Windows
         m_window = SDL_CreateWindow("Particle Fire Explosion",
-                                    SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+                                    SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
         if (m_window == NULL)
         {
@@ -56,7 +56,6 @@ namespace scr
 
         memset(m_buffer1, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
         memset(m_buffer2, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
-
 
         return true;
     }
@@ -100,56 +99,49 @@ namespace scr
 
         m_buffer1[(y * SCREEN_WIDTH) + x] = color;
     }
-    // void Screen::clear()
-    // {
-    //     memset(m_buffer1, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
-    //     memset(m_buffer2, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
-
-    // }
 
     void Screen::boxBlur()
     {
         // Swap the buffers, so pixels is in buffer2 and we are drawing to m_buffer1
-Uint32 *temp= m_buffer1;
-        m_buffer1= m_buffer2;
+        Uint32 *temp = m_buffer1;
+        m_buffer1 = m_buffer2;
         m_buffer2 = temp;
 
-        for(int y=0; y< SCREEN_HEIGHT; y++){
-            for(int x = 0; x< SCREEN_WIDTH; x++){
+        for (int y = 0; y < SCREEN_HEIGHT; y++)
+        {
+            for (int x = 0; x < SCREEN_WIDTH; x++)
+            {
 
+                int redTotal = 0;
+                int greenTotal = 0;
+                int blueTotal = 0;
 
-                int redTotal = 0 ;
-                int greenTotal = 0 ;
-                int blueTotal = 0 ;
-
-                for(int row=-1;row<=1; row++){
-                    for(int col = -1; col <=1; col ++){
+                for (int row = -1; row <= 1; row++)
+                {
+                    for (int col = -1; col <= 1; col++)
+                    {
                         int currentX = x + col;
                         int currentY = y + row;
 
-                        if (currentX >= 0 && currentX < SCREEN_WIDTH && currentY >=0 && currentY < SCREEN_HEIGHT){
-                            Uint32 color = m_buffer2[currentY*SCREEN_WIDTH + currentX];
+                        if (currentX >= 0 && currentX < SCREEN_WIDTH && currentY >= 0 && currentY < SCREEN_HEIGHT)
+                        {
+                            Uint32 color = m_buffer2[currentY * SCREEN_WIDTH + currentX];
 
                             Uint8 red = color >> 24;
                             Uint8 green = color >> 16;
                             Uint8 blue = color >> 8;
 
                             redTotal += red;
-                            greenTotal+= green;
-                            blueTotal += blue ;
-
+                            greenTotal += green;
+                            blueTotal += blue;
                         }
-
                     }
-        
+                }
+                Uint8 red = redTotal / 9;
+                Uint8 green = greenTotal / 9;
+                Uint8 blue = blueTotal / 9;
 
-                } 
-                Uint8 red = redTotal/9;
-                Uint8 green = greenTotal/9;
-                Uint8 blue = blueTotal/9;
-
-                setPixel(x , y,red, green,blue);
-
+                setPixel(x, y, red, green, blue);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace scr
     public:
         const static int SCREEN_WIDTH = 1000;
         const static int SCREEN_HEIGHT = 800;
-        ~Screen() {};
+        ~Screen(){};
 
     private:
         SDL_Window *m_window;
@@ -19,13 +19,12 @@ namespace scr
         Uint32 *m_buffer1;
         Uint32 *m_buffer2;
 
-
     public:
         Screen();
         bool init();
         bool proccesEvents();
         void update();
-        void setPixel(int x , int y, Uint8 red, Uint8 green, Uint8 blue);
+        void setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue);
         void clear();
         void close();
         void boxBlur();

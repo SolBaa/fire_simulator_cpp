@@ -3,21 +3,24 @@
 
 #include "Particle.h"
 
-namespace scr{
-class Swarm{
-private:
-    Particle * m_particles;
-    int lastTime;
-public:
-    const static int NPARTICLES = 5000;
+namespace scr
+{
+    class Swarm
+    {
+    private:
+        Particle *m_particles;
+        int lastTime;
 
-    Swarm();
-    void update(int elapsed);
-    ~Swarm();
+    public:
+        const static int NPARTICLES = 5000;
 
-   const Particle * const getParticles(){return m_particles;}
-};
+        Swarm();
+        void update(int elapsed);
+        ~Swarm();
 
+        const Particle *const getParticles() { return m_particles; }
+    };
+    
 }
 
 #endif

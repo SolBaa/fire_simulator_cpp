@@ -32,10 +32,10 @@ namespace scr
         {
             init();
         }
-    if (rand() < RAND_MAX/100){
-        init();
-    }
-
+        if (rand() < RAND_MAX / 100)
+        {
+            init();
+        }
     }
     Particle::~Particle()
     {

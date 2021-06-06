@@ -9,7 +9,6 @@ namespace scr
         double m_speed;
         void init();
 
-
     public:
         double m_x;
         double m_y;
