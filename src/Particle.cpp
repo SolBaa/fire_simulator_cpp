@@ -12,7 +12,7 @@ namespace scr
         m_direction = (2 * M_PI * rand())/ RAND_MAX;
     }
 
-    void Particle::update()
+    void Particle::update(int interval )
     {
         double xspeed = m_speed * cos(m_direction);
         double yspeed = m_speed * sin(m_direction);

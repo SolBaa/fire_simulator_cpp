@@ -7,11 +7,12 @@ namespace scr{
 class Swarm{
 private:
     Particle * m_particles;
+    int lastTime;
 public:
     const static int NPARTICLES = 5000;
 
     Swarm();
-    void update();
+    void update(int elapsed);
     ~Swarm();
 
    const Particle * const getParticles(){return m_particles;}

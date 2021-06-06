@@ -12,7 +12,7 @@ namespace scr
         double m_x;
         double m_y;
         Particle();
-        void update();
+        void update(int interval);
         ~Particle();
     };
 
